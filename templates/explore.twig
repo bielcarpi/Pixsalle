@@ -1,0 +1,38 @@
+{% extends "base.twig" %}
+
+{% block title %}Explore{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <div class="gallery-area section-padding40">
+        <div class="container">
+            <div class="gj-text-align-center mb-40">
+                <h2 style="font-size: xxx-large">Explore</h2>
+                <p>Take a look at the most-liked, newest and hottest photos of the network in this moment!</p>
+            </div>
+            <div class="row">
+                {% for photo in allPhotos %}
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                        <div class="box snake">
+                            <div class="gallery-img small-img" style="background-image: url({{ photo.link }});"></div>
+                            <div class="overlay">
+                                <div class="overlay-content">
+                                    <a href="/portfolio/album/{{ photo.albumId }}">
+                                        <i class="ti-search">
+                                        </i>
+                                        <p style="color: #FFEFAE; font-size: small">Explore Album</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="gj-text-align-center mb-35 mt-10">By
+                            <a style="color: black; text-decoration: underline; font-size: large" href="/portfolio/{{ photo.portfolioId }}" title="Go to its Portfolio">{{ photo.author|replace({'@salle.url.edu': ''}) }}</a>
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

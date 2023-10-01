@@ -1,0 +1,134 @@
+{% extends "base.twig" %}
+
+{% block title %}Album {{ albumId }}{% endblock %}
+
+{% block head %}
+    <script src="/assets/js/album.js"></script>
+{% endblock %}
+
+{% block content %}
+    {% if album is not defined %}
+        <div class="d-flex flex-column gj-text-align-center justify-content-center m-xl-5">
+            <p class="gj-text-align-center" style="font-size: larger; margin-top: 150px">Sorry! This Album does not exist.</p>
+            <div>
+                <a href="/explore" class="border-btn">Go to Explore</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="gallery-area section-padding40">
+            <div class="container">
+                <div class="gj-text-align-center">
+                    <h2 style="font-size: xx-large">{{ album.title }} Album</h2>
+                    <p class="gj-text-align-center mb-40">By
+                        <a style="color: black; text-decoration: underline; font-size: large" href="/portfolio/{{ album.portfolioId }}" title="Go to its Portfolio">{{ album.author|replace({'@salle.url.edu': ''}) }}</a>
+                    </p>
+                </div>
+                <div class="row">
+                    {% for photo in album.photos %}
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="box snake mb-30">
+                                    <div class="gallery-img small-img" style="background-image: url({{ photo.link }});"></div>
+                                    <div class="overlay">
+                                        <div class="overlay-content">
+                                            {% if isAlbumFromUser %}
+                                            <a onclick="showDeleteModal({{ photo.id }})" class="gj-cursor-pointer"><i class="ti-close"></i></a>
+                                            {% else %}
+                                                <a href="{{ photo.link }}" class="img-pop-up"><i class="ti-zoom-in"></i></a>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
+                {% if isAlbumFromUser %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row justify-content-center text-center" style="margin-top: 40px">
+                            <a href="/portfolio" class="border-btn">Return to Portfolio</a>
+                            <div class="m-2"></div>
+                            <button class="border-btn" data-toggle="modal" data-target="#addPhotoModal">Add Photo</button>
+                            <div class="m-2"></div>
+                            <a href="#" onclick="generateQRCode()" class="border-btn">Generate QR Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="deletePhotoModal" class="modal fade" role="dialog" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Delete Photo</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form role="form" onsubmit="return deletePhoto()">
+                                    <p>Are you sure you want to delete the Photo?</p>
+                                    <div class="form-group">
+                                        <p id="delete_photo_form_error" style="color: red"></p>
+                                    </div>
+                                    <br>
+                                    <button data-dismiss="modal" class="border-btn">Cancel</button>
+                                    <button type="submit" class="border-btn" style="background-color: red">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="addPhotoModal" class="modal fade" role="dialog" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Add Photo</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form role="form" onsubmit="return addPhoto()">
+                                    <p>Add a new photo to the album {{ albumTitle }}</p>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="cover">URL</label>
+                                        <input type="url" class="form-control" name="cover" id="form_url" required maxlength="1000" style="font-size: 1.6rem">
+                                    </div>
+                                    <div class="form-group">
+                                        <p id="add_photo_form_error" style="color: red"></p>
+                                    </div>
+                                    <br>
+                                    <button data-dismiss="modal" class="border-btn">Cancel</button>
+                                    <button type="submit" class="border-btn" style="background-color: steelblue">Add</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-btn text-center mt-50">
+                            <a href="/explore" class="border-btn">Return to Explore</a>
+                            <a href="#" onclick="generateQRCode()" class="border-btn">Generate QR Code</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    <div id="qrModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="col justify-content-center align-items-center">
+                        <img id="codeImg" src="" width="400" alt="QR Code for this Album">
+                        <div class="section-btn text-center mt-50">
+                            <a id="codeA" download="qrCode.png" class="border-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

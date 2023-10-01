@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: app-server
+    image: nginx:1.19.6-alpine
+    restart: unless-stopped
+    ports:
+      - "8030:80"
+    volumes:
+      - .:/app
+      - ./etc/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+
+  app:
+    container_name: app-php
+    image: vcaballerosalle/pwii-php-fpm
+    restart: unless-stopped
+    ports:
+      - "9030:9001"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+  db:
+    container_name: app-db
+    image: mysql
+    restart: unless-stopped
+    ports:
+      - "3330:3306"
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - ./docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+    env_file:
+      - .env
+
+  admin:
+    container_name: app-admin
+    image: adminer:4.8.1-standalone
+    restart: always
+    ports:
+      - 8081:8080
+    depends_on:
+      - db
+
+  barcode:
+    container_name: pw_barcode
+    image: vcaballerosalle/neodynamic-barcode
+    restart: unless-stopped
+    ports:
+      - "8020:80"

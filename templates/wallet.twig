@@ -1,0 +1,51 @@
+{% extends "base.twig" %}
+
+{% block title %}Wallet{% endblock %}
+
+{% block head %}
+    <script src="/assets/js/wallet.js"></script>
+{% endblock %}
+
+{% block content %}
+    <!-- Section Tittle -->
+    <section class="pricing-card-area">
+        <div class="container" style="margin-top: 20px; margin-bottom: 50px">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-tittle mb-60 text-center">
+                        <h2 class="mb-1">Wallet</h2>
+                        <p>Here you can see how much money do you have on your Wallet and transfer funds to it!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-10">
+                    <div class="single-card text-center mb-30">
+                        <div class="card-top">
+                            <img src="/assets/img/icon/wallet.svg" alt="" width="70px">
+                        </div>
+                        <div class="card-mid">
+                            <h4>{{ funds|number_format(2, '.', ',') }}€</h4>
+                        </div>
+                        <div class="card-bottom">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="section-tittle mb-60 text-center">
+                    <h3 class="mb-3">Need more Money?</h3>
+                    <form role="form" onsubmit="return false">
+                        <div class="row justify-content-center align-items-center">
+                            <input type="number" id="funds_input" required maxlength="50" style="font-size: 1.6rem; margin-right: 20px;">
+                            <button onclick="onSubmitAddFunds()" type="submit" class="btn btn-primary" style="background-color: steelblue">Add Funds</button>
+                        </div>
+                        <p id="form_error" style="color: red; margin-top: 30px;"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

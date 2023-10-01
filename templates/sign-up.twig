@@ -1,0 +1,50 @@
+{% extends "base.twig" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/assets/css/signup.css">
+{% endblock %}
+
+{% block content %}
+    <section class="py-5 my-5">
+        <div class="container">
+            <h1 class="mb-5">Sign Up to PixSalle, it's free!</h1>
+            <div class="bg-white shadow rounded-lg d-block d-sm-flex justify-content-center">
+                <form class="tab-content p-4 p-md-5" data-cy="sign-up" action="{{ formAction }}" method="POST">
+                    <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <br>
+                                    <input data-cy="sign-up__email" type="text" name="email">
+                                    {% if formErrors['email'] %}
+                                        <p data-cy="sign-up__wrongEmail">{{ formErrors['email'] }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <br>
+                                    <input data-cy="sign-up__password" type="password" name="password">
+                                    {% if formErrors['password'] %}
+                                        <p data-cy="sign-up__wrongPassword">{{ formErrors['password'] }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input class="button" data-cy="sign-up__btn" type="submit" value="Sign Up">
+                        </div>
+                        <br>
+                        <br>
+                        <p class="mb-0">Already registered?</p>
+                        <a class="sign-up" href="/sign-in">Sign In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

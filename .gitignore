@@ -1,0 +1,6 @@
+/vendor/
+.idea/
+public/uploads/*
+!public/uploads/.gitkeep
+.vscode/
+node_modules/

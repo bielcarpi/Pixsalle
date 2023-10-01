@@ -1,0 +1,192 @@
+{% extends "base.twig" %}
+
+{% block title %}Blog{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <main>
+        <!--? Hero start-->
+        <section class="slider-area slider-area2 slider-height2 d-flex align-items-center  hero-overly">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-11 col-md-12">
+                        <div class="hero__caption hero__caption2 text-center">
+                            <h2>Blog Entry</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Hero end -->
+        <!--? Blog Area Start -->
+        <section class="blog_area single-post-area pt-5">
+            <div class="container">
+                {% if entry is not null%}
+                <div class="row">
+                    <div class="col-lg-8 posts-list">
+                        <div class="single-post">
+                            <div class="feature-img">
+                                <img class="img-fluid" src="assets/img/blog/single_blog_1.png" alt="">
+                            </div>
+                            <div class="blog_details">
+                                <h2 style="color: #2d2d2d;">{{ entry.title }}</h2>
+                                <ul class="blog-info-link mt-3 mb-4">
+                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                                    <li><a href="#"><i class="fa fa-comments"></i> 02 Comments</a></li>
+                                </ul>
+                                <p class="excert">{{ entry.content }}</p>
+                            </div>
+                        </div>
+                        <div class="blog-author">
+                            <div class="media align-items-center">
+                                <img src="/assets/img/blog/author.png" alt="">
+                                <div class="media-body">
+                                    <a href="/portfolio/{{ entry.userId }}">
+                                        <h4>User ID: {{ entry.userId }}</h4>
+                                    </a>
+                                    <p>Click on the ID to go to its portfolio</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comments-area" style="margin-bottom: 80px">
+                            <h4>02 Comments</h4>
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="assets/img/blog/comment_1.png" alt="">
+                                        </div>
+                                        <div class="desc">
+                                            <p class="comment">
+                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                            </p>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <h5>
+                                                        <a href="#">Emilly Blunt</a>
+                                                    </h5>
+                                                    <p class="date">December 4, 2017 at 3:12 pm </p>
+                                                </div>
+                                                <div class="reply-btn">
+                                                    <a href="#" class="btn-reply text-uppercase">reply</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="assets/img/blog/comment_2.png" alt="">
+                                        </div>
+                                        <div class="desc">
+                                            <p class="comment">
+                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                            </p>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <h5>
+                                                        <a href="#">Emilly Blunt</a>
+                                                    </h5>
+                                                    <p class="date">December 4, 2017 at 3:12 pm </p>
+                                                </div>
+                                                <div class="reply-btn">
+                                                    <a href="#" class="btn-reply text-uppercase">reply</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+                            <div class="blog_right_sidebar">
+                                <aside class="single_sidebar_widget search_widget">
+                                    <h4 class="widget_title" style="color: #2d2d2d; margin-bottom: 10px">Create a new Entry</h4>
+                                    <button onclick="window.location.href='/blog/entry/create'" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">Create</button>
+                                </aside>
+                                <aside class="single_sidebar_widget search_widget">
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder='Search Keyword'
+                                                       onfocus="this.placeholder = ''"
+                                                       onblur="this.placeholder = 'Search Keyword'">
+                                                <div class="input-group-append">
+                                                    <button class="btns" type="button"><i class="ti-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                                type="submit">Search</button>
+                                    </form>
+                                </aside>
+                                <aside class="single_sidebar_widget instagram_feeds">
+                                    <h4 class="widget_title" style="color: #2d2d2d;">Interesting Albums</h4>
+                                    <ul class="instagram_row flex-wrap">
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="/assets/img/post/post_5.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="/assets/img/post/post_6.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="/assets/img/post/post_7.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="/assets/img/post/post_8.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="/assets/img/post/post_9.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="/assets/img/post/post_10.png" alt="">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </aside>
+                                <aside class="single_sidebar_widget newsletter_widget">
+                                    <h4 class="widget_title" style="color: #2d2d2d;">Newsletter</h4>
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                                   onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                                        </div>
+                                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                                type="submit">Subscribe</button>
+                                    </form>
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                    <div style="margin: 80px auto;" class="gj-text-align-center">
+                        <p style="font-size: xxx-large"><i class="ti-comments-smiley"></i></p>
+                        <p>Sorry, this entry doesn't exist!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+        <!-- Blog Area End -->
+    </main>
+{% endblock %}
